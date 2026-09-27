@@ -14,18 +14,26 @@
         <div class="form-group">
 
             <label for="username">Username:</label>
-            <input id="username" type="text" name="username">
+            <input id="username" type="text" name="username" minlength="3">
             <span class="error-message" id="usernameError"></span>
 
         </div>
-        <div form-group>
+        <div class="form-group">
+            <label for="email" >Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error-message" id="emailError"></span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" minlength="8">
+            <small>Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number.</small>
+            <span class="error-message" id="passwordError"></span>
 
         </div>
-        <div form-group>
-
-        </div>
-        <div form-group>
-
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword">
+            <span class="error-message" id="confirmPasswordError"></span>
         </div>
         <button type="submit">Register</button>
 
