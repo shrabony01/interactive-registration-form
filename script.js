@@ -8,7 +8,7 @@ const passwordInput=document.getElementById('password');
 const confirmPasswordInput=document.getElementById('confirmPassword');
 
 
-// spans
+// error messsage spans
 const usernameError=document.getElementById('usernameError');
 const emailError=document.getElementById('emailError');
 const passwordError=document.getElementById('passwordError');
@@ -16,13 +16,23 @@ const confirmPasswordError=document.getElementById('confirmPasswordError');
 
 //  On page load, check if a username is saved in localStorage. If so, pre-fill the username field.
 window.addEventListener('DOMContentLoaded',()=>{
-    const savedUser =localStorage.getItem('savedUsername');
-    if(savedUser){
-        usernameInput.value=savedUser;
+    const savedUsername =localStorage.getItem('savedUsername');
+    if(savedUsername){
+        usernameInput.value=savedUsername;
     }
 });
+// function to show error messages
+function showError(input, errorSpan, message) {
+    errorSpan.textContent = message;
+    
+}
 
-// validate username
+function clearError(input, errorSpan) {
+    errorSpan.textContent = "";
+    
+}
+
+// username validation
 function validateUsername(){
     if(usernameInput.validity.valueMissing){
         usernameError.textContent='Username is required.';
@@ -63,8 +73,15 @@ function validatePassword(){
         passwordError.textContent=`Password must be at least ${passwordInput.minLength} characters.`;
         return false;
     }
+    else if(passwordInput.validity.patternMismatch){
+        passwordError.textContent='Must include at least one uppercase letter, one lowercase letter, and one number';
+        return false;
+    }
     else{
         passwordError.textContent='';
+        if (confirmPasswordInput.value.length > 0) {
+        validateConfirmPassword();
+    }
         return true;
     }
 }
@@ -85,7 +102,7 @@ function validateConfirmPassword(){
 }
 
 // real time validation
-usernameInput.addEventListener('input,validateUsername');
+usernameInput.addEventListener('input',validateUsername);
 emailInput.addEventListener('input',validateEmail);
 passwordInput.addEventListener('input',() =>{
     validatePassword();

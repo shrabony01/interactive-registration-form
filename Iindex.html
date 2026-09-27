@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Registration Form</title>
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Interactive User Registration Form</h1>
@@ -14,25 +15,25 @@
         <div class="form-group">
 
             <label for="username">Username:</label>
-            <input id="username" type="text" name="username" minlength="3">
+            <input id="username" type="text" name="username" minlength="3" required>
             <span class="error-message" id="usernameError"></span>
 
         </div>
         <div class="form-group">
             <label for="email" >Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email"  required>
             <span class="error-message" id="emailError"></span>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" minlength="8">
+            <input type="password" id="password" name="password" minlength="8" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}">
             <small>Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number.</small>
             <span class="error-message" id="passwordError"></span>
 
         </div>
         <div class="form-group">
             <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword">
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
             <span class="error-message" id="confirmPasswordError"></span>
         </div>
         <button type="submit">Register</button>
