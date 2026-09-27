@@ -83,3 +83,51 @@ function validateConfirmPassword(){
     return true;
   }
 }
+
+// real time validation
+usernameInput.addEventListener('input,validateUsername');
+emailInput.addEventListener('input',validateEmail);
+passwordInput.addEventListener('input',() =>{
+    validatePassword();
+
+    // recheck confirm field if password changes
+    if(confirmPasswordInput.value.length>0){
+        validateConfirmPassword();
+    }
+});
+confirmPasswordInput.addEventListener('input',validateConfirmPassword);
+
+// form submission
+
+form.addEventListener('submit',(event)=>{
+    // prevent page refress
+    event.preventDefault();
+
+    // run final validation across all fields
+    const isUsernameValid = validateUsername();
+  const isEmailValid = validateEmail();
+  const isPasswordValid = validatePassword();
+  const isConfirmPasswordValid = validateConfirmPassword();
+  const isFormValid = isUsernameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid;
+
+  if (isFormValid) {
+    // Save username in localStorage
+    localStorage.setItem('savedUsername', usernameInput.value);
+
+    alert(`Registration successful! Welcome, ${usernameInput.value}.`);
+
+    // Reset inputs and error spans
+    form.reset();
+  } else {
+    // Focus the first invalid field
+    if (!isUsernameValid) {
+      usernameInput.focus();
+    } else if (!isEmailValid) {
+      emailInput.focus();
+    } else if (!isPasswordValid) {
+      passwordInput.focus();
+    } else if (!isConfirmPasswordValid) {
+      confirmPasswordInput.focus();
+    }
+  }
+});
